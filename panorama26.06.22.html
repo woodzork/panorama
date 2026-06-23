@@ -38,68 +38,33 @@ html, body {
   transform-origin: top left;
 }
 
-/* ── Hotspot ── */
+/* ── Hotspot (rectangle matching photo footprint) ── */
 .hotspot {
   position: absolute;
-  transform: translate(-50%, -50%);
   z-index: 20;
   cursor: pointer;
 }
 
 .hotspot-area {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.hotspot-dot {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
-  opacity: 0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  pointer-events: none;
-  position: relative;
-}
-
-.hotspot-area:hover .hotspot-dot,
-.hotspot.active .hotspot-dot {
-  opacity: 1;
-}
-
-.hotspot-area:hover .hotspot-dot {
-  transform: scale(1.15);
-}
-
-.hotspot-dot::after {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.5);
-  animation: ring-pulse 1.6s ease-out infinite;
-  opacity: 0;
-}
-
-.hotspot-area:hover .hotspot-dot::after {
-  opacity: 1;
-}
-
-@keyframes ring-pulse {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  100% { transform: scale(2.2); opacity: 0; }
+.hotspot:hover .hotspot-area,
+.hotspot.active .hotspot-area {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 16px rgba(255,255,255,0.35), inset 0 0 16px rgba(255,255,255,0.15);
 }
 
 .hotspot-popup {
   position: absolute;
-  bottom: 32px;
+  bottom: calc(100% + 14px);
   left: 50%;
   background: rgba(255,255,255,0.97);
   border: 1px solid #ddd;
@@ -135,8 +100,8 @@ html, body {
 
 .popup-title {
   font-family: Arial, sans-serif;
-  font-size: 10pt;
-  font-weight: 300;
+  font-size: 11pt;
+  font-weight: 700;
   color: #222;
   margin-bottom: 5px;
   line-height: 1.3;
@@ -144,7 +109,7 @@ html, body {
 
 .popup-desc {
   font-family: Arial, sans-serif;
-  font-size: 12pt;
+  font-size: 11pt;
   color: #555;
   line-height: 1.45;
 }
@@ -156,7 +121,7 @@ html, body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  Padding-top: 12vh;
+  padding-top: 12vh;
   cursor: pointer;
   transition: opacity 0.5s ease;
 }
@@ -183,7 +148,7 @@ html, body {
 
 <div id="start-overlay">
   <div id="start-overlay-text">
-    This is an interactive timeline of my projects.<br>Pan forward or back by dragging the mouse or using a finger.<br>Zoom by clicking the mouse or pressing with your finger on an area of interest.<br>Each project was completed while employed by the firm shown in the section footing.<br><br>Click anywhere to start.
+    This is an interactive timeline of my projects.<br>Click anywhere to start.
   </div>
 </div>
 
@@ -201,122 +166,250 @@ html, body {
 // ═══════════════════════════════════════════════
 const HOTSPOT_DATA = [
   {
-    "x": 220,
-    "y": 487,
+    "x": 446,
+    "y": 104,
+    "w": 548,
+    "h": 352,
     "title": "",
     "desc": ""
   },
   {
-    "x": 248,
-    "y": 611,
+    "x": 442,
+    "y": 648,
+    "w": 264,
+    "h": 212,
     "title": "",
     "desc": ""
   },
   {
-    "x": 932,
-    "y": 527,
+    "x": 866,
+    "y": 480,
+    "w": 184,
+    "h": 268,
     "title": "",
     "desc": ""
   },
   {
-    "x": 1336,
-    "y": 587,
+    "x": 1082,
+    "y": 620,
+    "w": 336,
+    "h": 216,
     "title": "",
     "desc": ""
   },
   {
-    "x": 1276,
-    "y": 779,
+    "x": 1498,
+    "y": 100,
+    "w": 492,
+    "h": 476,
     "title": "",
     "desc": ""
   },
   {
-    "x": 1480,
-    "y": 871,
+    "x": 1494,
+    "y": 616,
+    "w": 192,
+    "h": 152,
     "title": "",
     "desc": ""
   },
   {
-    "x": 2496,
-    "y": 411,
+    "x": 1706,
+    "y": 616,
+    "w": 292,
+    "h": 240,
     "title": "",
     "desc": ""
   },
   {
-    "x": 1984,
-    "y": 395,
+    "x": 2126,
+    "y": 100,
+    "w": 312,
+    "h": 276,
     "title": "",
     "desc": ""
   },
   {
-    "x": 1972,
-    "y": 623,
+    "x": 2126,
+    "y": 664,
+    "w": 328,
+    "h": 196,
     "title": "",
     "desc": ""
   },
   {
-    "x": 2472,
-    "y": 659,
+    "x": 2522,
+    "y": 100,
+    "w": 372,
+    "h": 300,
     "title": "",
     "desc": ""
   },
   {
-    "x": 2980,
-    "y": 599,
+    "x": 2634,
+    "y": 440,
+    "w": 248,
+    "h": 192,
     "title": "",
     "desc": ""
   },
   {
-    "x": 3384,
-    "y": 403,
+    "x": 2522,
+    "y": 676,
+    "w": 368,
+    "h": 180,
     "title": "",
     "desc": ""
   },
   {
-    "x": 4352,
-    "y": 138,
+    "x": 2958,
+    "y": 316,
+    "w": 424,
+    "h": 264,
     "title": "",
     "desc": ""
   },
   {
-    "x": 4968,
-    "y": 414,
+    "x": 3570,
+    "y": 120,
+    "w": 452,
+    "h": 256,
     "title": "",
     "desc": ""
   },
   {
-    "x": 5624,
-    "y": 362,
+    "x": 3414,
+    "y": 436,
+    "w": 252,
+    "h": 144,
     "title": "",
     "desc": ""
   },
   {
-    "x": 6104,
-    "y": 422,
+    "x": 4206,
+    "y": 164,
+    "w": 352,
+    "h": 316,
     "title": "",
     "desc": ""
   },
   {
-    "x": 7112,
-    "y": 334,
+    "x": 4914,
+    "y": 104,
+    "w": 660,
+    "h": 300,
     "title": "",
     "desc": ""
   },
   {
-    "x": 6596,
-    "y": 594,
+    "x": 5110,
+    "y": 600,
+    "w": 436,
+    "h": 272,
     "title": "",
     "desc": ""
   },
   {
-    "x": 7696,
-    "y": 774,
+    "x": 4706,
+    "y": 600,
+    "w": 356,
+    "h": 268,
     "title": "",
     "desc": ""
   },
   {
-    "x": 8488,
-    "y": 462,
+    "x": 4626,
+    "y": 164,
+    "w": 224,
+    "h": 224,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 4622,
+    "y": 420,
+    "w": 236,
+    "h": 152,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 5650,
+    "y": 120,
+    "w": 456,
+    "h": 212,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 6126,
+    "y": 136,
+    "w": 436,
+    "h": 256,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 5714,
+    "y": 596,
+    "w": 424,
+    "h": 272,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 6310,
+    "y": 440,
+    "w": 236,
+    "h": 272,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 6626,
+    "y": 124,
+    "w": 1476,
+    "h": 196,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 6618,
+    "y": 376,
+    "w": 632,
+    "h": 196,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 7286,
+    "y": 376,
+    "w": 816,
+    "h": 420,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 8450,
+    "y": 124,
+    "w": 436,
+    "h": 328,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 8162,
+    "y": 316,
+    "w": 260,
+    "h": 348,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 8458,
+    "y": 504,
+    "w": 248,
+    "h": 344,
     "title": "",
     "desc": ""
   }
@@ -328,7 +421,7 @@ const img   = document.getElementById("img");
 const frame = document.getElementById("frame");
 
 let x = 0, y = 0;
-const speed    = 0.20;
+const speed    = 0.40;
 const endPause = 6000;
 const fadeTime = 2000;
 
@@ -378,11 +471,11 @@ function buildHotspots() {
     el.className = 'hotspot';
     el.dataset.x = hs.x;
     el.dataset.y = hs.y;
+    el.dataset.w = hs.w;
+    el.dataset.h = hs.h;
 
     el.innerHTML = `
-      <div class="hotspot-area">
-        <div class="hotspot-dot"></div>
-      </div>
+      <div class="hotspot-area"></div>
       <div class="hotspot-popup">
         <div class="popup-title">${hs.title}</div>
         <div class="popup-desc">${hs.desc}</div>
@@ -430,17 +523,18 @@ function buildHotspots() {
 function positionHotspots() {
   const baseScale = getScale();
   const zoomMult  = zoomed ? zoomFactor : 1;
+  const totalScale = baseScale * zoomMult;
 
   document.querySelectorAll('.hotspot').forEach(el => {
     const hx = parseFloat(el.dataset.x);
     const hy = parseFloat(el.dataset.y);
-    el.style.left = (hx * baseScale * zoomMult) + 'px';
-    el.style.top  = (hy * baseScale * zoomMult) + 'px';
+    const hw = parseFloat(el.dataset.w);
+    const hh = parseFloat(el.dataset.h);
 
-    // scale the hit area + dot to match zoom so the hotspot
-    // stays the right relative size over the magnified photo
-    const area = el.querySelector('.hotspot-area');
-    if (area) area.style.transform = `scale(${zoomMult})`;
+    el.style.left   = (hx * totalScale) + 'px';
+    el.style.top    = (hy * totalScale) + 'px';
+    el.style.width  = (hw * totalScale) + 'px';
+    el.style.height = (hh * totalScale) + 'px';
   });
 }
 
