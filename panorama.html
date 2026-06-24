@@ -31,7 +31,7 @@ html, body {
 }
 
 .track img {
-  height: 400px;
+  height: 500px;
   width: auto;
   display: block;
   pointer-events: none;
@@ -153,20 +153,44 @@ html, body {
 // ═══════════════════════════════════════════════
 const HOTSPOT_DATA = [
   {
-    "x": 800,
-    "y": 700,
-    "w": 200,
-    "h": 180,
-    "title": "Chattanooga Riverfront Development",
-    "desc": "4th and 5th year urban design studio"
+    "x": 444,
+    "y": 96,
+    "w": 556,
+    "h": 348,
+    "title": "Urban Design Studio",
+    "desc": "Fourth and Fifth year Urban Design Studio worked with the Lyndhurst Foundation to propose solutions for the downtown riverfront redevelopment project"
   },
   {
-    "x": 1400,
-    "y": 850,
-    "w": 200,
-    "h": 180,
-    "title": "Rammed Earth Works",
-    "desc": "I spent two years working with an early pioneer of rammed earth construction"
+    "x": 448,
+    "y": 652,
+    "w": 260,
+    "h": 216,
+    "title": "",
+    "desc": ""
+  },
+  {
+    "x": 872,
+    "y": 476,
+    "w": 176,
+    "h": 268,
+    "title": "REW",
+    "desc": "I spent several years working with David Easton as he pioneered the modern development of rammed earth construction. These project progressed form early experiments with mixtures and techniques to beautify refined textures and stratification that was carefully controlled by David's process"
+  },
+  {
+    "x": 1084,
+    "y": 632,
+    "w": 332,
+    "h": 204,
+    "title": "REW",
+    "desc": "This was a project we built overlooking Tomles Bay near Point Reyes. The project was created on a private property adjacent to an edge of the Golden Gate National Park."
+  },
+  {
+    "x": 1508,
+    "y": 132,
+    "w": 480,
+    "h": 448,
+    "title": "Mill Valley Community Center",
+    "desc": "A very popular local community center for Mill Valley CA. I developed this graph image for the center and for the SF AIA graphics competition. This image won First Place"
   }
 ];
 // ═══════════════════════════════════════════════
@@ -295,9 +319,9 @@ function positionHotspots() {
 
 function syncPopupScale() {
   const popups = document.querySelectorAll('.hotspot-popup');
-  // zoomed: scale up for a bigger, easier-to-read popup
-  // unzoomed: normal size
-  const s = zoomed ? 0.85 : 1;
+  const zoomedScale   = 0.85;   // keeps the zoomed-in popup exactly as it is now
+  const unzoomedScale = 0.75;    // bump this up/down to resize only the unzoomed popup
+  const s = zoomed ? zoomedScale : unzoomedScale;
   popups.forEach(p => {
     p.style.transform = `translate(-50%, -50%) scale(${s})`;
   });
