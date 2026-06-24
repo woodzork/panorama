@@ -64,37 +64,24 @@ html, body {
 
 .hotspot-popup {
   position: absolute;
-  bottom: calc(100% + 14px);
+  top: 50%;
   left: 50%;
   background: rgba(255,255,255,0.97);
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 10px 13px;
   width: 200px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.18s ease, transform 0.18s ease;
-  transform-origin: bottom center;
-  transform: translateX(-50%) scale(0.85);
-}
-
-.hotspot-popup::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.97);
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  transform: translateX(-50%) rotate(45deg);
+  transform-origin: center center;
+  transform: translate(-50%, -50%) scale(0.85);
 }
 
 .hotspot.active .hotspot-popup {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
 }
 
@@ -148,7 +135,7 @@ html, body {
 
 <div id="start-overlay">
   <div id="start-overlay-text">
-    This is an interactive timeline of my projects.<br>Click anywhere to start.
+    This is an interactive timeline of my projects.<br>Pan forward or back by dragging the mouse or using a finger.<br>Zoom by clicking the mouse or pressing with your finger on an area of interest.<br>Each project was completed while employed by the firm shown in the section footing.<br><br>Click anywhere to start.
   </div>
 </div>
 
@@ -166,252 +153,20 @@ html, body {
 // ═══════════════════════════════════════════════
 const HOTSPOT_DATA = [
   {
-    "x": 446,
-    "y": 104,
-    "w": 548,
-    "h": 352,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 442,
-    "y": 648,
-    "w": 264,
-    "h": 212,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 866,
-    "y": 480,
-    "w": 184,
-    "h": 268,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 1082,
-    "y": 620,
-    "w": 336,
-    "h": 216,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 1498,
-    "y": 100,
-    "w": 492,
-    "h": 476,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 1494,
-    "y": 616,
-    "w": 192,
-    "h": 152,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 1706,
-    "y": 616,
-    "w": 292,
-    "h": 240,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 2126,
-    "y": 100,
-    "w": 312,
-    "h": 276,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 2126,
-    "y": 664,
-    "w": 328,
-    "h": 196,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 2522,
-    "y": 100,
-    "w": 372,
-    "h": 300,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 2634,
-    "y": 440,
-    "w": 248,
-    "h": 192,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 2522,
-    "y": 676,
-    "w": 368,
+    "x": 800,
+    "y": 700,
+    "w": 200,
     "h": 180,
-    "title": "",
-    "desc": ""
+    "title": "Chattanooga Riverfront Development",
+    "desc": "4th and 5th year urban design studio"
   },
   {
-    "x": 2958,
-    "y": 316,
-    "w": 424,
-    "h": 264,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 3570,
-    "y": 120,
-    "w": 452,
-    "h": 256,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 3414,
-    "y": 436,
-    "w": 252,
-    "h": 144,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 4206,
-    "y": 164,
-    "w": 352,
-    "h": 316,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 4914,
-    "y": 104,
-    "w": 660,
-    "h": 300,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 5110,
-    "y": 600,
-    "w": 436,
-    "h": 272,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 4706,
-    "y": 600,
-    "w": 356,
-    "h": 268,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 4626,
-    "y": 164,
-    "w": 224,
-    "h": 224,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 4622,
-    "y": 420,
-    "w": 236,
-    "h": 152,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 5650,
-    "y": 120,
-    "w": 456,
-    "h": 212,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 6126,
-    "y": 136,
-    "w": 436,
-    "h": 256,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 5714,
-    "y": 596,
-    "w": 424,
-    "h": 272,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 6310,
-    "y": 440,
-    "w": 236,
-    "h": 272,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 6626,
-    "y": 124,
-    "w": 1476,
-    "h": 196,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 6618,
-    "y": 376,
-    "w": 632,
-    "h": 196,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 7286,
-    "y": 376,
-    "w": 816,
-    "h": 420,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 8450,
-    "y": 124,
-    "w": 436,
-    "h": 328,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 8162,
-    "y": 316,
-    "w": 260,
-    "h": 348,
-    "title": "",
-    "desc": ""
-  },
-  {
-    "x": 8458,
-    "y": 504,
-    "w": 248,
-    "h": 344,
-    "title": "",
-    "desc": ""
+    "x": 1400,
+    "y": 850,
+    "w": 200,
+    "h": 180,
+    "title": "Rammed Earth Works",
+    "desc": "I spent two years working with an early pioneer of rammed earth construction"
   }
 ];
 // ═══════════════════════════════════════════════
@@ -544,7 +299,7 @@ function syncPopupScale() {
   // unzoomed: normal size
   const s = zoomed ? 0.85 : 1;
   popups.forEach(p => {
-    p.style.transform = `translateX(-50%) scale(${s})`;
+    p.style.transform = `translate(-50%, -50%) scale(${s})`;
   });
 }
 
